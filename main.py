@@ -29,3 +29,66 @@
 # Vārdnīcas - https://www.w3schools.com/python/python_dictionaries.asp
 # Klonēt repozitoriju - hhttps://code.visualstudio.com/docs/sourcecontrol/intro-to-git
 #
+
+import json
+
+Preces = []
+
+
+with open('cash.json', 'r') as openfile:# JSON fails tiek sākts
+    Preces = json.load(openfile)
+
+while True: # Šī funkcija dod cilvēkam izvēlēties darbību
+    print("\nCash register Menu:")
+    print("1. Pievienot jaunu preci")
+    print("2. Dzēst preci pēc kārtas nummura")
+    print("3. Pievienot atlaidi")
+    print("4. Samaksāt")
+    print("5. Izdrukāt čeku")
+    print("6. Iziet")
+    choice = input("Enter your choice: ")
+    
+    if choice == "1":
+
+        prece = input("Ievadiet jūsu preci: ")
+        cena = input("Ievadiet jūsu preces cenu(centos): ")
+        atlaide = input("Ievadiet atladi (ja ir): ")
+        
+        Jaunas_preces = {"prece": prece,"cena": cena, "atlaide": atlaide}
+        Preces.append(Jaunas_preces) # pievieno vārdnīcā preci
+
+        if cena >0:
+            print("kluda")
+    
+
+        pass
+    elif choice == "2":
+
+        Dzest_preci = int(input("Ievadiet preces kārtas nummuru: "))
+        Preces.pop(Dzest_preci)# Izdzēs no vārdnīcas izvēlēto preci
+        print("Prece izdzēsta")
+
+        pass
+    elif choice == "3":
+        Atlaide_precei = input("Vai jūs vēlaties pievienot atlaidi?(atbildiet ja vai ne):")
+        if Atlaide_precei == "ne":
+                print("Paldeis par jūsu izvēli")
+        elif Atlaide_precei == "ja":
+            Atlaide_precei = input("Ierakstiet atlaidi: ")
+            print(Atlaide_precei, '%')
+        pass
+    elif choice == "4":
+        pass
+    elif choice == "5":
+        print(Preces)
+        pass
+    elif choice == "6":
+        pass
+        print("Iziet...")
+        break
+    else:
+        print("Invalid choice. Please try again.")
+
+    with open("cash.json", "w") as outfile:
+        json.dump(Preces, outfile) # JSON fails saglabā visu vārdnīcā
+    pass
